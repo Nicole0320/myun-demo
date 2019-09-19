@@ -40,4 +40,8 @@ export class PullService {
   play(): void {
     this.puller.startPlay();
   }
+
+  stop(): void {
+    this.puller.stopPlay();
+  }
 }
