@@ -6,8 +6,6 @@ import { PushService } from './../push.service';
   templateUrl: './pusher.component.html',
   styleUrls: ['./pusher.component.css']
 })
-
-
 export class PusherComponent implements OnInit {
   constructor(
     private pushService: PushService,
@@ -15,11 +13,19 @@ export class PusherComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pushService.init(this.el.nativeElement);
   }
 
-  onClick(): void {
-    console.log(this.el.nativeElement);
+  // tslint:disable-next-line: use-life-cycle-interface
+  ngAfterViewInit() {
+    this.pushService.init(this.el.nativeElement.querySelector('.pusher'));
+  }
+
+  publish(): void {
+    this.pushService.publish();
+  }
+
+  stop(): void {
+    this.pushService.stop();
   }
 
 }

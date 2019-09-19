@@ -32,7 +32,15 @@ export class PushService {
   }
 
   publish(): void {
-    this.pusher.startPublish(this.config);
+    if (!this.pusher) {
+      this.log('push init failed', 'error');
+      return;
+    }
+    this.pusher.startPublish(this.mrtcUrl);
     alert('published');
+  }
+
+  stop(): void {
+    this.pusher.stopPublish();
   }
 }
