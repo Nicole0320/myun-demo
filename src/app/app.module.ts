@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PusherComponent } from './pusher/pusher.component';
+import { PlayerComponent } from './player/player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PusherComponent
+    PusherComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule

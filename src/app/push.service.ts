@@ -31,12 +31,13 @@ export class PushService {
     this.addListener();
   }
 
-  publish(): void {
+  publish(id?: string): void {
     if (!this.pusher) {
       this.log('push init failed', 'error');
       return;
     }
-    this.pusher.startPublish(this.mrtcUrl);
+    const url: string = id ? `${this.mrtcUrl}_${id}` : this.mrtcUrl;
+    this.pusher.startPublish(url);
     alert('published');
   }
 
