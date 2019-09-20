@@ -8,6 +8,7 @@ export class PushService {
   private config: object = {
     type: 'camera'
   };
+  private overlayElement: HTMLElement;
   pusher: any;
 
   constructor() { }
@@ -26,6 +27,7 @@ export class PushService {
   }
 
   init(element: HTMLElement): void {
+    this.overlayElement = element;
     console.log('init: ', Mrtc);
     this.pusher = new Mrtc.Broadcaster(element);
     this.addListener();
@@ -51,10 +53,14 @@ export class PushService {
 
   mute(mute: boolean): void {
     this.pusher.setMute(mute);
-    this.log(`volumn is ${close ? 'off' : 'on'}.`);
+    this.log(`volumn is ${mute ? 'off' : 'on'}.`);
   }
 
   getStatus(): object {
     return this.pusher.getPublishStats();
+  }
+
+  reset(element = this.overlayElement): void {
+    this.init(element);
   }
 }

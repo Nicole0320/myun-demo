@@ -46,6 +46,10 @@ export class PusherComponent implements OnInit {
     this.pushService.mute(this.mute);
   }
 
+  reset(): void {
+    this.pushService.reset();
+  }
+
   private logPushStatus(): NodeJS.Timer {
     const clock = setInterval(() => {
       this.status = JSON.stringify(this.pushService.getStatus());
