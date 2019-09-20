@@ -18,7 +18,7 @@ export class PullService {
   }
 
   private log(message: any, type: string = ''): void {
-    console.log(`[Push Service]: ${type} `, message);
+    console.log(`[Pull Service]: ${type} `, message);
   }
 
   private addListener(): void {

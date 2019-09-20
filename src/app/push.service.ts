@@ -38,10 +38,23 @@ export class PushService {
     }
     const url: string = id ? `${this.mrtcUrl}_${id}` : this.mrtcUrl;
     this.pusher.startPublish(url);
-    alert('published');
   }
 
   stop(): void {
     this.pusher.stopPublish();
+  }
+
+  closeVideo(close: boolean): void {
+    this.pusher.setVideoMute(close);
+    this.log(`video is ${close ? 'off' : 'on'}.`);
+  }
+
+  mute(mute: boolean): void {
+    this.pusher.setMute(mute);
+    this.log(`volumn is ${close ? 'off' : 'on'}.`);
+  }
+
+  getStatus(): object {
+    return this.pusher.getPublishStats();
   }
 }

@@ -7,6 +7,12 @@ import { PushService } from './../push.service';
   styleUrls: ['./pusher.component.css']
 })
 export class PusherComponent implements OnInit {
+  videoClosed = false;
+  mute = false;
+  status: string;
+
+  private timmer: NodeJS.Timer;
+
   constructor(
     private pushService: PushService,
     private el: ElementRef
@@ -22,10 +28,28 @@ export class PusherComponent implements OnInit {
 
   publish(): void {
     this.pushService.publish();
+    this.timmer = this.logPushStatus();
   }
 
   stop(): void {
     this.pushService.stop();
+    clearInterval(this.timmer);
   }
 
+  toggleVideo(): void {
+    this.videoClosed = !this.videoClosed;
+    this.pushService.closeVideo(this.videoClosed);
+  }
+
+  toggleMute(): void {
+    this.mute = !this.mute;
+    this.pushService.mute(this.mute);
+  }
+
+  private logPushStatus(): NodeJS.Timer {
+    const clock = setInterval(() => {
+      this.status = JSON.stringify(this.pushService.getStatus());
+    }, 3000);
+    return clock;
+  }
 }
