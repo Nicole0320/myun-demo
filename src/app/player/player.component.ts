@@ -28,4 +28,7 @@ export class PlayerComponent implements OnInit {
     this.pullService.stop();
   }
 
+  retset(): void {
+    this.pullService.reset();
+  }
 }

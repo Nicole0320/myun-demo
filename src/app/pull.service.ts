@@ -12,6 +12,7 @@ export class PullService {
     autoplay: true,
     volumn: 0.5
   };
+  private overlayElement: HTMLElement;
   puller: any;
 
   constructor() {
@@ -31,6 +32,7 @@ export class PullService {
   }
 
   init(element: HTMLElement, id?: string): void {
+    this.overlayElement = element;
     const url: string = id ? `${this.mrtcUrl}_${id}` : this.mrtcUrl;
     console.log('init: ', Mrtc);
     this.puller = new Mrtc.Player(url, element, this.config);
@@ -43,5 +45,10 @@ export class PullService {
 
   stop(): void {
     this.puller.stopPlay();
+  }
+
+  // 重置
+  reset(element = this.overlayElement): void {
+    this.puller = this.init(element);
   }
 }
