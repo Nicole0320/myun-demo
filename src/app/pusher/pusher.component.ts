@@ -11,7 +11,7 @@ export class PusherComponent implements OnInit {
   mute = false;
   status: string;
 
-  private timmer: NodeJS.Timer;
+  private timmer: number;
 
   constructor(
     private pushService: PushService,
@@ -50,8 +50,8 @@ export class PusherComponent implements OnInit {
     this.pushService.reset();
   }
 
-  private logPushStatus(): NodeJS.Timer {
-    const clock = setInterval(() => {
+  private logPushStatus(): number {
+    const clock = window.setInterval(() => {
       this.status = JSON.stringify(this.pushService.getStatus());
     }, 3000);
     return clock;
