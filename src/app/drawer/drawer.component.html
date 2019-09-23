@@ -1,7 +1,9 @@
 <p>write: 当前第{{page}}页</p>
 <div class="menu"></div>
 <div class="write"></div>
-<button>下一页</button>
+<button (click)="prevPage()">上一页</button>
+<button (click)="nextPage()">下一页</button>
 <br>
 <p>read:</p>
 <div class="read"></div>
+<p>当前：{{modeText}} <button (click)="switchMode()">切换</button></p>

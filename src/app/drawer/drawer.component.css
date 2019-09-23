@@ -1,4 +1,9 @@
 .write, .read {
     height: 400px;
     width: 600px;
+    border: 1px solid brown;
+}
+
+button {
+    padding: 4px 8px;
 }
