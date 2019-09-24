@@ -70,7 +70,7 @@ export class DrawerComponent implements OnInit {
   private createReplayBoard(): void {
     this.mode = board.R_MODE_TIME;
     this.createReadBoard(this.mode);
-    this.reader.setNowTime(new Date());
+    this.reader.setNowTime(new Date().getTime() - 5000);
   }
 
   // tslint:disable-next-line: use-life-cycle-interface
@@ -94,12 +94,11 @@ export class DrawerComponent implements OnInit {
   }
 
   switchMode(): void {
+    this.reader.destroy();
     if (this.mode === board.R_MODE_LISTEN) {
-      this.reader.destroy();
       this.mode = board.R_MODE_TIME;
       this.createReplayBoard();
     } else {
-      this.reader.destroy();
       this.mode = board.R_MODE_LISTEN;
       this.createListenBoard();
     }
