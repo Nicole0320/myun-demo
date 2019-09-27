@@ -1,0 +1,8 @@
+.big-window {
+    border: 2px solid red;
+}
+
+.small-window {
+    border: 2px solid slateblue;
+    background: pink;
+}

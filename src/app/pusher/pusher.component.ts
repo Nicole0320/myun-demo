@@ -10,6 +10,7 @@ export class PusherComponent implements OnInit {
   videoClosed = false;
   mute = false;
   status: string;
+  screen = false;
 
   private timmer: number;
 
@@ -55,5 +56,10 @@ export class PusherComponent implements OnInit {
       this.status = JSON.stringify(this.pushService.getStatus());
     }, 3000);
     return clock;
+  }
+
+  swichScreen() {
+    this.screen = !this.screen;
+    this.pushService.switchToScreen(this.screen);
   }
 }

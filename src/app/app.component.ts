@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PusherComponent } from './pusher/pusher.component';
+import { PlayerComponent } from './player/player.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myun-sdk-demo';
+  componentArr = [PusherComponent, PlayerComponent];
+  switch(): void {
+    this.componentArr = this.componentArr.reverse();
+  }
 }

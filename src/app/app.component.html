@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
+<button (click)="switch()">Switch</button>
+<br>
+<ng-container *ngFor="let item of componentArr; first as isFirst">
+    <div [ngClass]="{'big-window': isFirst, 'small-window': !isFirst}">
+        <ng-container *ngComponentOutlet="item"></ng-container>
+    </div>
+</ng-container>

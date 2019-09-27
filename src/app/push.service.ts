@@ -63,4 +63,12 @@ export class PushService {
   reset(element = this.overlayElement): void {
     this.init(element);
   }
+
+  switchToScreen(screen: boolean): void {
+    if (screen) {
+      this.pusher.switchToScreen();
+    } else {
+      this.pusher.switchToCamera();
+    }
+  }
 }
