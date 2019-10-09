@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,28 +14,40 @@ export class PullService {
     volumn: 0.5
   };
   private overlayElement: HTMLElement;
+  private id: string | number;
   puller: any;
 
-  constructor() {
+  constructor(
+    private userService: UserService
+  ) {
   }
 
   private log(message: any, type: string = ''): void {
+    if (type === 'error') {
+      console.error('[Pull Service]', message);
+      return;
+    }
     console.log(`[Pull Service]: ${type} `, message);
   }
 
   private addListener(): void {
     this.puller.on('error', (err: any) => {
-      this.log(err, 'error');
+      if ('server stream not exist' === err.message) {
+        this.userService.addEmptyId(this.id);
+      } else {
+        this.log(err.message, 'error');
+      }
     });
     this.puller.on('stream_ready', (media: any) => {
       console.log('拉流成功', media);
+      this.userService.deleteEmpltyId(this.id);
     });
   }
 
-  init(element: HTMLElement, id?: string): void {
+  init(element: HTMLElement, id?: string | number): void {
     this.overlayElement = element;
-    const url: string = id ? `${this.mrtcUrl}_${id}` : this.mrtcUrl;
-    console.log('init: ', Mrtc);
+    this.id = id;
+    const url: string = this.id ? `${this.mrtcUrl}_${this.id}` : this.mrtcUrl;
     this.puller = new Mrtc.Player(url, element, this.config);
     this.addListener();
   }

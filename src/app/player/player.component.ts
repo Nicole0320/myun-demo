@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { PullService } from '../pull.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { PullService } from '../pull.service';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
+  @Input() userId: number;
 
   constructor(
     private pullService: PullService,
@@ -17,7 +18,7 @@ export class PlayerComponent implements OnInit {
 
   // tslint:disable-next-line: use-life-cycle-interface
   ngAfterViewInit() {
-    this.pullService.init(this.el.nativeElement.querySelector('.player'));
+    this.pullService.init(this.el.nativeElement.querySelector('.player'), this.userId);
   }
 
   play(): void {

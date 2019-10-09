@@ -1,3 +1,5 @@
-<p>
-  player-list works!
-</p>
+<ul class="player-list" *ngFor="let user of userService.users">
+  <li>
+    <app-player [userId]="user.id"></app-player>
+  </li>
+</ul>

@@ -6,13 +6,24 @@ import { User } from './custom';
 })
 export class UserService {
   users: Array<User>;
+  emptyId: Set<number|string> = new Set();
 
   constructor() {
+    this.users = [];
     for (let index = 0; index < 32; index++) {
-      const element: User = {
+      const user: User = {
         id: index,
-        playing: false
+        push: false
       };
+      this.users.push(user);
     }
+  }
+
+  addEmptyId(id: number|string) {
+    this.emptyId.add(id);
+  }
+
+  deleteEmpltyId(id: number|string) {
+    this.emptyId.delete(id);
   }
 }
