@@ -22,14 +22,14 @@ export class PlayerComponent implements OnInit {
   }
 
   play(): void {
-    this.pullService.play();
+    this.pullService.play(this.userId);
   }
 
   stop(): void {
-    this.pullService.stop();
+    this.pullService.stop(this.userId);
   }
 
   retset(): void {
-    this.pullService.reset();
+    this.pullService.reset(this.el.nativeElement.querySelector('.player'), this.userId);
   }
 }

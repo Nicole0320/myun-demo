@@ -7,6 +7,7 @@ import { User } from './custom';
 export class UserService {
   users: Array<User>;
   emptyId: Set<number|string> = new Set();
+  usablePushId: number|string;
 
   constructor() {
     this.users = [];
@@ -21,9 +22,20 @@ export class UserService {
 
   addEmptyId(id: number|string) {
     this.emptyId.add(id);
+    this.updateUsablePushId();
   }
 
   deleteEmpltyId(id: number|string) {
     this.emptyId.delete(id);
+    this.updateUsablePushId();
+  }
+
+  updateUsablePushId() {
+    const values = Array.from(this.emptyId);
+    if (values.length > 0) {
+      this.usablePushId = values[0];
+    } else {
+      this.usablePushId = 0;
+    }
   }
 }

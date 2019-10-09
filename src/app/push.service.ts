@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,9 @@ export class PushService {
   private overlayElement: HTMLElement;
   pusher: any;
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   private log(message: any, type: string = ''): void {
     console.log(`[Push Service]: ${type} `, message);
@@ -33,7 +36,7 @@ export class PushService {
     this.addListener();
   }
 
-  publish(id?: string): void {
+  publish(id: string|number = this.userService.usablePushId): void {
     if (!this.pusher) {
       this.log('push init failed', 'error');
       return;
