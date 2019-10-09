@@ -11,7 +11,7 @@ export class UserService {
 
   constructor() {
     this.users = [];
-    for (let index = 0; index < 32; index++) {
+    for (let index = 0; index < 16; index++) {
       const user: User = {
         id: index,
         push: false
