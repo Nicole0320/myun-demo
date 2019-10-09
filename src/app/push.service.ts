@@ -17,12 +17,20 @@ export class PushService {
   ) { }
 
   private log(message: any, type: string = ''): void {
-    console.log(`[Push Service]: ${type} `, message);
+    if (type === 'error') {
+      console.error('[Pull Service]', message);
+      return;
+    }
+    console.log(`[Pull Service]: ${type} `, message);
   }
 
   private addListener(): void {
     this.pusher.on('error', (err: any) => {
+      this.stop();
       this.log(err, 'error');
+      if (err.message === 'server stream alread exist') {
+        alert('请重试publish');
+      }
     });
     this.pusher.on('published', () => {
       console.log('推流成功');
@@ -42,6 +50,10 @@ export class PushService {
       return;
     }
     const url: string = id ? `${this.mrtcUrl}_${id}` : this.mrtcUrl;
+    const publishStatus = this.getStatus();
+    if (publishStatus.videoBitrate + publishStatus.audioBitrate > 0) {
+      this.stop();
+    }
     this.pusher.startPublish(url);
   }
 
@@ -59,7 +71,7 @@ export class PushService {
     this.log(`volumn is ${mute ? 'off' : 'on'}.`);
   }
 
-  getStatus(): object {
+  getStatus(): any {
     return this.pusher.getPublishStats();
   }
 
