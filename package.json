@@ -45,5 +45,6 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~2.9.2"
-  }
+  },
+  "homepage": "https://nicole0320.github.io/myun-demo/dist/myun-sdk-demo/"
 }
