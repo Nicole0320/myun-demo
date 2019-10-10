@@ -1,6 +1,6 @@
 declare namespace Mrtc {
   class Broadcaster {
-    constructor(element: HTMLElement);
+    constructor(element: HTMLElement, config?: object);
   }
   class Player {
     constructor(mrtc_url: string, videoContainer: HTMLElement, config?: object);

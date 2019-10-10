@@ -1,5 +1,6 @@
-<ul class="player-list" *ngFor="let user of userService.users">
-  <li>
+<p>player list</p>
+<ul class="player-list">
+  <li *ngFor="let user of userService.users">
     <app-player [userId]="user.id"></app-player>
   </li>
 </ul>

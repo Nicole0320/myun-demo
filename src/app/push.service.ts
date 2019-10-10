@@ -7,9 +7,11 @@ import { UserService } from './user.service';
 export class PushService {
   private mrtcUrl = 'mrtc://mrtc.myun.tv/live/rl7mmgml';
   private config: object = {
-    type: 'camera'
+    type: 'camera',
+    bitrate: 500
   };
   private overlayElement: HTMLElement;
+  private publishLoading = false;
   pusher: any;
 
   constructor(
@@ -33,6 +35,7 @@ export class PushService {
       }
     });
     this.pusher.on('published', () => {
+      this.publishLoading = false;
       console.log('推流成功');
     });
   }
@@ -40,7 +43,7 @@ export class PushService {
   init(element: HTMLElement): void {
     this.overlayElement = element;
     console.log('init: ', Mrtc);
-    this.pusher = new Mrtc.Broadcaster(element);
+    this.pusher = new Mrtc.Broadcaster(element, this.config);
     this.addListener();
   }
 
@@ -49,16 +52,21 @@ export class PushService {
       this.log('push init failed', 'error');
       return;
     }
+    if (this.publishLoading) {
+      return;
+    }
     const url: string = id ? `${this.mrtcUrl}_${id}` : this.mrtcUrl;
     const publishStatus = this.getStatus();
     if (publishStatus.videoBitrate + publishStatus.audioBitrate > 0) {
       this.stop();
     }
+    this.publishLoading = true;
     this.pusher.startPublish(url);
   }
 
   stop(): void {
     this.pusher.stopPublish();
+    this.publishLoading = false;
   }
 
   closeVideo(close: boolean): void {

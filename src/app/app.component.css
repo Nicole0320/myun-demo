@@ -1,8 +1,8 @@
 .big-window {
-    border: 2px solid red;
+    border: 2px solid rosybrown;
+    margin-bottom: 40px;
 }
 
 .small-window {
-    border: 2px solid slateblue;
-    background: pink;
+    border: 2px solid silver;
 }

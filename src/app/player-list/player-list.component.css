@@ -1,0 +1,16 @@
+ul, li {
+    list-style: none;
+}
+
+ul.player-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.player-list li{
+    border: 1px solid peachpuff;
+    display: flex;
+    margin: 8px;
+}
